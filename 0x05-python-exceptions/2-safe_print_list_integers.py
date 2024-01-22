@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+def safe_print_list_integers(my_list=[], x=0):
+    number = 0
+    for z in range(x):
+        try:
+            print("{:d}".format(my_list[z]), end="")
+            number += 1
+        except (ValueError, TypeError):
+            z += 1
+            continue
+    print("")
+    return number
