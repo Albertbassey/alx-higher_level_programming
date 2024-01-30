@@ -1,17 +1,19 @@
 #!/usr/bin/python3
-"""Defines a class rectangle"""
+"""
+Defines a class rectangle
+"""
 
 
 class Rectangle:
-
+    """Definition of a rectangle"""
     def __init__(self, width=0, height=0):
-        """Initializes rectangle."""
+        """Initializes the rectangle"""
         self.height = height
         self.width = width
 
     @property
     def width(self):
-        """get/set the private instance attribute width"""
+        """get/set for the private instance attribute width"""
         return self.__width
 
     @width.setter
@@ -36,11 +38,11 @@ class Rectangle:
         self.__height = value
 
     def area(self):
-        """returns area."""
+        """returns the area"""
         return (self.__width * self.__height)
 
     def perimeter(self):
-        """returns perimeters."""
+        """returns the perimeter"""
         if self.__width == 0 or self.__height == 0:
             return 0
         return ((self.__width * 2) + (self.__height * 2))
