@@ -1,13 +1,27 @@
 #!/usr/bin/python3
-""" New class """
+"""Module for class MyInt"""
 
 
 class MyInt(int):
-    """ My int inherits from int """
-    def __eq__(self, num):
-        """ Function for equals """
-        return(int(self) != int(num))
+    """class MyInt swaps == and !="""
+    def __eq__(self, other):
+        """Swap == with !=
 
-    def __ne__(self, num):
-        """Function for not equals"""
-        return (int(self) == int(num))
+        Args:
+            other: object to compare
+
+        Returns: True if value and self are differents
+                False in otherwise
+        """
+        return super().__ne__(other)
+
+    def __ne__(self, other):
+        """Swap != with ==
+
+        Args:
+            other: object to compare
+
+        Returns: False if value and self are iqual
+                True in otherwise
+        """
+        return super().__eq__(other)
