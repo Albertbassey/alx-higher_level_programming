@@ -1,25 +1,33 @@
 #!/usr/bin/node
 
 const request = require('request');
-const id = process.argv[2];
-const url = `https://swapi-api.alx-tools.com/api/films/${id}`;
+const { argv } = require('process');
 
-request.get(url, (error, response, body) => {
+const arg_ = argv[2];
+const url = 'https://swapi-api.hbtn.io/api/films/' + arg_;
+request(url, function (error, response, body) {
   if (error) {
-    console.log(error);
-  } else {
-    const content = JSON.parse(body);
-    const characters = content.characters;
-    // console.log(characters);
-    for (const character of characters) {
-      request.get(character, (error, response, body) => {
-        if (error) {
-          console.log(error);
-        } else {
-          const names = JSON.parse(body);
-          console.log(names.name);
-        }
-      });
-    }
+    return console.log(error);
   }
+  const json_ = JSON.parse(body);
+  const promesas = [];
+  for (const property of json_.characters) {
+    const promise = new Promise(function (resolve, reject) {
+      request(property, function (er, response, body) {
+        if (er) {
+          return reject(er);
+        }
+        const name_ = JSON.parse(body).name;
+        resolve(name_);
+      });
+    });
+    promesas.push(promise);
+  }
+  Promise.all(promesas).then(function (resultado) {
+    for (const x of resultado) {
+      console.log(x);
+    }
+  }).catch(function (res) {
+    console.log(res);
+  });
 });
